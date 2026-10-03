@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Learnly{% endblock %}</title>
+  <link rel="icon" href="{{ url_for('static', filename='images/logo.jpg') }}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+</head>
+<body class="{% block body_class %}{% endblock %}">
+
+  <header class="nav">
+    <a href="{{ url_for('home') }}" class="logo-container" aria-label="Learnly home">
+      <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Learnly logo" class="logo-image" />
+    </a>
+    <nav>
+      {% if user %}
+        <span class="nav-user"><i class="fa-solid fa-user"></i> {{ user.name }} · {{ user.role }}</span>
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        {% if user.role == 'teacher' %}<a href="{{ url_for('users_page') }}">Users</a>{% endif %}
+        <a href="{{ url_for('logout') }}" class="btn btn-small">Log out</a>
+      {% else %}
+        <a href="{{ url_for('sign_in') }}" class="btn btn-small">Sign In</a>
+        <a href="{{ url_for('sign_in') }}#signup" class="btn btn-small btn-ghost">Sign Up</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>Learnly · Learn. Connect. Grow.</footer>
+
+  <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learnly | {{ title }}</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/logo-icon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pages.css') }}">
+</head>
+<body>
+
+    <header class="topbar">
+        <a class="brand" href="/{{ role }}">
+            <img src="{{ url_for('static', filename='images/logo-icon.png') }}" alt="Learnly logo">
+            <span class="wordmark">Learn<span>ly</span></span>
+        </a>
+        <div class="who">
+            <span class="badge">{{ {'parent': 'Parent', 'student': 'Student', 'teacher': 'Teacher'}[role] }}</span>
+            <span class="uname">{{ name }}</span>
+            <a class="logout" href="/logout">Log out</a>
+        </div>
+    </header>
+
+    <main class="container">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+
+    </main>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

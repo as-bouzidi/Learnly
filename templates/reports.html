@@ -1,0 +1,79 @@
+{% extends "page_base.html" %}
+
+{% block content %}
+
+{% if role == 'parent' %}
+<section class="card">
+    <h2>My children</h2>
+    <p class="sub">Link your child's account using the email they registered with.</p>
+
+    <div class="children">
+        {% for c in children %}
+            <span class="tag">{{ c.firstname }} {{ c.lastname }}</span>
+        {% else %}
+            <span class="muted">No linked account yet.</span>
+        {% endfor %}
+    </div>
+
+    <form action="/parent/link" method="post" class="link-row">
+        <input type="email" name="student_email" placeholder="Child's email" required>
+        <button type="submit">Link account</button>
+    </form>
+</section>
+{% endif %}
+
+<!-- ===== summary: one card per student ===== -->
+<section class="card">
+    <h2>{{ title }}</h2>
+    <p class="sub">A quick overview of absences, homework and the latest exam score.</p>
+
+    {% for s in summary %}
+    <div class="student-card">
+        <div class="sc-head">
+            <div class="avatar">{{ s.name[0]|upper }}</div>
+            <b>{{ s.name }}</b>
+            <span class="tag">{{ s.section }}</span>
+        </div>
+        <div class="sc-grid">
+            <div class="stat"><div class="label">Absences</div><div class="value">{{ s.absences }}</div></div>
+            <div class="stat"><div class="label">Unfinished homework</div><div class="value">{{ s.homework }}</div></div>
+            <div class="stat"><div class="label">Latest exam</div><div class="value {{ s.last_exam|score_class }}">{{ s.last_exam|score_text }}</div></div>
+        </div>
+    </div>
+    {% else %}
+    <div class="empty">
+        {% if role == 'parent' %}Link your child's account to see their reports.{% else %}No reports yet.{% endif %}
+    </div>
+    {% endfor %}
+</section>
+
+<!-- ===== everything the teacher wrote ===== -->
+<section class="card">
+    <div class="card-head">
+        <h3>All reports <span class="count-pill">{{ notes|length }}</span></h3>
+    </div>
+
+    {% for n in notes %}
+    <div class="report">
+        <div class="avatar">{{ n.student[0]|upper }}</div>
+        <div class="report-body">
+            <div class="report-head">
+                {% if role == 'parent' %}<b>{{ n.student }}</b>{% endif %}
+                <span class="tag">{{ n.section }}</span>
+                <span class="date">{{ n.created_at[:16] }}</span>
+            </div>
+            <div class="chips">
+                {% if n.absences %}<span class="chip red">{{ n.absences }} absence{{ 's' if n.absences != 1 }}</span>{% endif %}
+                {% if n.homework %}<span class="chip amber">{{ n.homework }} unfinished homework</span>{% endif %}
+                {% if n.exam_score is not none %}<span class="chip {{ n.exam_score|score_class }}">Exam {{ n.exam_score|score_text }}</span>{% endif %}
+            </div>
+            {% if n.content %}<p class="report-text">{{ n.content }}</p>{% endif %}
+            <div class="by">From {{ n.teacher }}</div>
+        </div>
+    </div>
+    {% else %}
+    <div class="empty">No reports yet.</div>
+    {% endfor %}
+</section>
+
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Sign in · Learnly{% endblock %}
+{% block body_class %}page-auth{% endblock %}
+
+{% block content %}
+<div class="form-box">
+
+  <!-- ---------- Login ---------- -->
+  <div class="login-container" id="login">
+    <div class="top">
+      <span>Don't have an account? <a href="#" id="showRegister">Sign Up</a></span>
+      <h1 class="form-title">Login</h1>
+    </div>
+
+    <form id="loginForm" novalidate>
+      <div class="input-box">
+        <input type="email" id="login-email" class="input-field" placeholder="Email" autocomplete="email" required />
+        <i class="fa-solid fa-envelope"></i>
+      </div>
+      <div class="input-box">
+        <input type="password" id="login-password" class="input-field" placeholder="Password" autocomplete="current-password" required />
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <div class="input-box">
+        <input type="submit" class="submit" value="Sign In" />
+      </div>
+      <div class="two-col">
+        <div class="one">
+          <input type="checkbox" id="login-check" />
+          <label for="login-check">Remember me</label>
+        </div>
+        <a href="#" id="forgotLink">Forgot password?</a>
+      </div>
+      <p class="form-msg" id="loginMsg" role="alert"></p>
+    </form>
+  </div>
+
+  <!-- ---------- Register ---------- -->
+  <div class="register-container" id="register">
+    <div class="top">
+      <span>Have an account? <a href="#" id="showLogin">Login</a></span>
+      <h1 class="form-title">Sign Up</h1>
+    </div>
+
+    <form id="registerForm" novalidate>
+      <div class="two-forms">
+        <div class="input-box">
+          <input type="text" id="firstName" class="input-field" placeholder="First name" autocomplete="given-name" required />
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <div class="input-box">
+          <input type="text" id="lastName" class="input-field" placeholder="Last name" autocomplete="family-name" required />
+          <i class="fa-solid fa-user"></i>
+        </div>
+      </div>
+      <div class="input-box">
+        <input type="email" id="register-email" class="input-field" placeholder="Email" autocomplete="email" required />
+        <i class="fa-solid fa-envelope"></i>
+      </div>
+      <div class="input-box">
+        <input type="password" id="register-password" class="input-field" placeholder="Password (6+ characters)" autocomplete="new-password" required />
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <div class="input-box">
+        <select id="role" class="input-field" required>
+          <option value="" disabled selected>I am a…</option>
+          <option value="student">Student</option>
+          <option value="parent">Parent</option>
+          <option value="teacher">Teacher</option>
+        </select>
+        <i class="fa-solid fa-id-card"></i>
+      </div>
+      <div class="input-box">
+        <input type="submit" class="submit" value="Register" />
+      </div>
+      <div class="two-col">
+        <div class="one">
+          <input type="checkbox" id="register-check" required />
+          <label for="register-check">I accept the</label>
+          <a href="#" id="termsLink">Terms &amp; conditions</a>
+        </div>
+      </div>
+      <p class="form-msg" id="registerMsg" role="alert"></p>
+    </form>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,40 @@
+/* Teacher page extras (base look comes from pages.css) */
+
+.send {
+  width: 100%; border: none; cursor: pointer; color: #fff;
+  font-weight: 600; font-size: 15px; padding: 14px 24px; border-radius: 14px;
+  background: linear-gradient(90deg, var(--blue-soft), var(--purple));
+  box-shadow: 0 8px 18px rgba(60, 90, 220, .25); transition: .2s;
+}
+.send:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 12px 22px rgba(60, 90, 220, .32); }
+.send:disabled { opacity: .6; cursor: wait; }
+
+.card-head { flex-wrap: wrap; gap: 10px; }
+.search { width: 220px; max-width: 100%; padding: 8px 14px; font-size: 14px; border-radius: 20px; }
+
+#notesList .report { align-items: flex-start; }
+.report-top { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.report-top .date { margin-left: auto; font-size: 12px; color: var(--muted); }
+.del {
+  flex: none; border: 1px solid var(--line); background: #fff; color: var(--red);
+  width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 15px; transition: .2s;
+}
+.del:hover { background: #fdeaed; border-color: #f5c2cb; }
+
+.field.invalid input, .field.invalid select { border-color: var(--red); }
+.field-error { color: var(--red); font-size: 12.5px; margin-top: 4px; }
+
+.meter-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+.toast {
+  position: fixed; left: 50%; bottom: 24px; z-index: 50;
+  transform: translate(-50%, 30px); opacity: 0; pointer-events: none;
+  padding: 12px 22px; border-radius: 14px; font-size: 14px; font-weight: 500;
+  color: #fff; background: var(--ink); box-shadow: 0 10px 30px rgba(20, 30, 70, .3);
+  transition: .3s;
+}
+.toast.show { transform: translate(-50%, 0); opacity: 1; }
+.toast.success { background: var(--green); }
+.toast.error { background: var(--red); }
+
+@media (max-width: 560px) { .search { width: 100%; } }

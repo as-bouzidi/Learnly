@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Users · Learnly{% endblock %}
+{% block body_class %}page-dash{% endblock %}
+
+{% block content %}
+<section class="dash">
+  <h2 class="dash-title">Registered users</h2>
+  <div class="panel wide table-wrap">
+    <table class="users-table">
+      <thead>
+        <tr><th>ID</th><th>First name</th><th>Last name</th><th>Email</th><th>Role</th></tr>
+      </thead>
+      <tbody>
+        {% for u in users %}
+        <tr>
+          <td>{{ u["id"] }}</td>
+          <td>{{ u["firstname"] }}</td>
+          <td>{{ u["lastname"] }}</td>
+          <td>{{ u["email"] }}</td>
+          <td>{{ u["role"] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block body_class %}page-home{% endblock %}
+
+{% block content %}
+<section class="home" id="home">
+  <div class="home-panel">
+    <div class="content">
+      <h3>Learn<span>ly</span></h3>
+      <div class="eyebrow">Learn. Connect. Grow.</div>
+
+      <p>
+        Learnly is an educational platform designed to connect students, parents, and teachers in one simple and accessible space. It helps parents follow their children's academic progress, attendance, grades, and homework, while enabling teachers to share updates and communicate more easily with families.
+      </p>
+      <p>
+        Our goal is to improve communication, encourage student success, and make educational follow-up easier for everyone.
+      </p>
+
+      {% if user %}
+        <a href="{{ url_for('dashboard') }}" class="btn">Go to my dashboard</a>
+      {% else %}
+        <a href="{{ url_for('sign_in') }}" class="btn">Sign in</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <section class="icons-container">
+    <div class="icons">
+      <h3>Students</h3>
+      <span>Learn and achieve</span>
+    </div>
+    <div class="icons">
+      <h3>Parents</h3>
+      <span>Stay informed</span>
+    </div>
+    <div class="icons">
+      <h3>Teachers</h3>
+      <span>Share and support</span>
+    </div>
+  </section>
+</section>
+{% endblock %}

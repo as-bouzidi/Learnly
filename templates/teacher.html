@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learnly | Teacher</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/logo-icon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pages.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/teacher.css') }}">
+</head>
+<body data-role="teacher">
+
+    <header class="topbar">
+        <a class="brand" href="/teacher">
+            <img src="{{ url_for('static', filename='images/logo-icon.png') }}" alt="Learnly logo">
+            <span class="wordmark">Learn<span>ly</span></span>
+        </a>
+        <div class="who">
+            <span class="badge">Teacher</span>
+            <span class="uname">{{ fullname }}</span>
+            <a class="logout" href="/logout">Log out</a>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <form id="noteForm" class="card" autocomplete="off" novalidate>
+            <h2>Student report</h2>
+            <p class="sub">Fill in the report in a few seconds. The parent and the student will see it right away.</p>
+
+            <div class="field">
+                <label for="teacherName">Teacher name</label>
+                <input type="text" id="teacherName" value="{{ lastname }}" readonly>
+            </div>
+
+            <div class="field">
+                <label for="studentSelect">Student name</label>
+                <select id="studentSelect" required>
+                    <option value="" disabled selected>Select a student</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="section">Section</label>
+                <input type="text" id="section" placeholder="e.g. 3AS1" required>
+            </div>
+
+            <div class="two">
+                <div class="field">
+                    <label for="absences">Number of absences</label>
+                    <div class="stepper">
+                        <button type="button" data-target="absences" data-step="-1">−</button>
+                        <input type="number" id="absences" min="0" value="0">
+                        <button type="button" data-target="absences" data-step="1">+</button>
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="homework">Unfinished homework</label>
+                    <div class="stepper">
+                        <button type="button" data-target="homework" data-step="-1">−</button>
+                        <input type="number" id="homework" min="0" value="0">
+                        <button type="button" data-target="homework" data-step="1">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="examScore">Exam score <small>(out of 20)</small></label>
+                <input type="number" id="examScore" min="0" max="20" step="0.25" placeholder="e.g. 14.5">
+                <div class="meter"><span id="scoreFill"></span></div>
+            </div>
+
+            <div class="field">
+                <label for="content">Short note about the student</label>
+                <div class="quick">
+                    <button type="button" data-text="Excellent work today.">Excellent work</button>
+                    <button type="button" data-text="Needs more revision at home.">Needs revision</button>
+                    <button type="button" data-text="Participates well in class.">Participates well</button>
+                    <button type="button" data-text="Please follow up on homework.">Follow up homework</button>
+                    <button type="button" data-text="Great improvement lately!">Great improvement</button>
+                </div>
+                <textarea id="content" maxlength="200" placeholder="Write a short note..."></textarea>
+                <div class="counter"><span id="count">0</span>/200</div>
+            </div>
+
+            <button type="submit" class="send" id="sendBtn">Send to the parent</button>
+        </form>
+        <section class="card">
+            <div class="card-head">
+                <h3>Sent reports <span class="count-pill" id="reportCount">0</span></h3>
+                <input type="search" class="search" id="search" placeholder="Search a student...">
+            </div>
+            <div id="notesList"></div>
+        </section>
+
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="{{ url_for('static', filename='js/teacher.js') }}"></script>
+</body>
+</html>
