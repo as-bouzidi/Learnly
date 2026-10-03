@@ -1,4 +1,5 @@
 # Learnly
+<<<<<<< HEAD
 
 Connects **students**, **parents** and **teachers**.
 
@@ -40,3 +41,6 @@ static/images/          logo, logo-icon, backgrounds
 
 Set `SECRET_KEY` as an environment variable in production
 (otherwise a random key is generated once in `instance/secret_key`).
+=======
+Learnly is web app which helps parents stay meaningfully connected to their children’s learning- progress, struggles, habits, and motivation- without adding noise or burden for families or educators (school or training settings).
+>>>>>>> e8a039101123d3ebafe8ad7174ff06f48c22d5a8
